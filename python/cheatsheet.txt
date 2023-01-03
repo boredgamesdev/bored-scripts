@@ -1,0 +1,25 @@
+TCP networking
+
+import socket
+
+# create a socket object
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 
+ # connect the client
+client.connect((target_host,target_port))
+
+# send some data
+client.send("GET / HTTP/1.1\r\nHost: google.com\r\n\r\n")
+
+# receive some data
+response = client.recv(4096)
+
+UDP networking
+
+# create a socket object
+➊ client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# send some data
+➋ client.sendto("AAABBBCCC",(target_host,target_port))
+# receive some data
+➌ data, addr = client.recvfrom(4096)
+print data
