@@ -43,7 +43,9 @@ if __name__ == "__main__":
         # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Assume roles and run AWS CLI commands')
     parser.add_argument('aws_command', type=str, help='AWS CLI command to run after assuming each role')
-    args = parser.parse_args()
+    args = parser.parse_args() 
+    aws_command = args.aws_command
+
 
     
     # Loop through each role ARN
