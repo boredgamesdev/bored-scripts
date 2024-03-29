@@ -1,6 +1,8 @@
 import subprocess
 import boto3
 import os
+import argparse
+
 
 def get_temp_credentials(role_arn):
     # Initialize a session using the default credentials chain
@@ -36,8 +38,12 @@ def run_aws_command(aws_access_key_id, aws_secret_access_key, aws_session_token,
 
 if __name__ == "__main__":
     # List of role ARNs to assume
-    role_arns = ["arn:aws:iam::ACCOUNT#:role/ReadOnlyAccess","arn:aws:iam::ACCOUNT#:role/TestAdmin"]
     
+    role_arns = ["arn:aws:iam::ACCOUNT#:role/ReadOnlyAccess","arn:aws:iam::ACCOUNT#:role/TestAdmin"]
+        # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Assume roles and run AWS CLI commands')
+    parser.add_argument('aws_command', type=str, help='AWS CLI command to run after assuming each role')
+    args = parser.parse_args()
     # AWS CLI command to run after assuming each role
     aws_command = "aws sts get-caller-identity"
     
